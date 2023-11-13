@@ -71,7 +71,7 @@ namespace ANVC.Scalar
             UnityWebRequest request = UnityWebRequest.Get(urlPrefix + "rdf/node/" + uriSegment + "?" + queryString);
             Debug.Log("Load node: " + request.url);
             yield return request.SendWebRequest();
-            if (!request.isNetworkError && !request.isHttpError)
+            if (!(request.result == UnityWebRequest.Result.ConnectionError) && !(request.result== UnityWebRequest.Result.ProtocolError))
             {
                 Debug.Log(request.downloadHandler.text);
                 JSONNode data = JSON.Parse(request.downloadHandler.text);
