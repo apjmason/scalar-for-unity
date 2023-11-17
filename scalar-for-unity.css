@@ -1,0 +1,108 @@
+/* Stylesheet for responsive unity scalar integration viewer
+   Use with scalar-for-unity.js to add classes for CSS grid
+    Austin Mason 11/17/23
+   */
+
+/* Remove Scalar defaults */
+
+.scalar-media-label {display:none !important;}
+
+header{display:none !important;}
+
+#incoming_comments {display:none;}
+
+/* Adjust link styling
+.texteo_icon {
+    background-size: 0px;
+    padding-left: 0px;
+}
+.media_link, .widget_link {
+    background-color: transparent;
+} */
+
+/* Override defaults for full page width */
+.page{max-width:100%;}
+
+.body_copy {
+    max-width: 100%;
+    padding: 0 1rem;
+}
+
+
+/* Grid layout 
+   Requires wrapping two divs around source view above
+   Under the Scalar Media link insert:
+      <div class="terms">
+         <div class="module_top">TITLE FOR PANEL HERE</strong></div>
+         .... Enter all your annotation terms here with note links 
+             (for popup) and media links (using existing for camera updates)
+      </div>
+*/
+
+/* Added to content container via jquery on the Styling > JavaScript tab */
+.grid {
+    display: grid;
+    grid-template-columns: minmax(10px, 1fr) 2fr;
+    grid-template-rows: minmax(0px, 1fr);
+    place-content: center;
+}
+
+/* Position of Unity container */
+.slot {
+    grid-row: 1/2;
+    grid-column: 2/4;
+}
+
+/* Position of Term list panel */
+.module_terms {
+    grid-row: 1/2;
+    grid-column: 1/2;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 66vh;
+}
+
+/* Panel title styling */
+.module_top {
+    margin-bottom: 20px;
+    width: calc(100% + 144px);
+    text-align: center;
+    border-bottom: 1px solid #ccc;
+    padding: 10px;
+    background-color: #efefef;
+    margin-left: -72px;
+    position: sticky;
+    top: 0rem;
+}
+
+/* Sets Unity iframe to take up 2/3 of screen height and width */
+.mediaObject {
+    height: 66vh;
+    width: 66vw;
+}
+
+.mediaContainer iframe {
+    width: 66vw !important;
+    height: 66vh !important;
+}
+
+/* Responsive for smaller screens. Move Unity scene to top half of screen
+   and scrolling panel to bottom half */
+@media screen and (max-width: 900px) { 
+.slot {
+  grid-row: 1/2;
+  grid-column: 1/4;
+}
+.module_terms {
+  grid-row: 2/3;
+  grid-column: 1/4;  
+  margin-bottom:20px;
+}
+.mediaObject {width:100vw; height:50vh;}
+.mediaContainer iframe {width:100vw !important;height:50vh !important;}
+ }
+
+/* Constrain image sizing in note popup */
+.note_viewer img {
+    max-width: 100%;
+}
